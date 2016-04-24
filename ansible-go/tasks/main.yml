@@ -1,0 +1,67 @@
+---
+- name: Install Go dependencies
+  apt: update_cache=yes name={{item}} state=present
+  with_items:
+            - mercurial
+            - gcc
+            - libc6-dev
+            - git-core
+
+- name: check tarfile exists
+  stat: path=/tmp/{{tarfile}}
+  register: st
+
+- name: download tarfile
+  get_url: url=https://storage.googleapis.com/golang/{{tarfile}} dest=/tmp/{{tarfile}} timeout=180
+  when: not st.stat.exists
+
+- name: check go directory exits
+  stat: path=/usr/local/go{{version}}
+  register: go
+
+- name: check /usr/local/go exits
+  stat: path=/usr/local/go
+  register: dir 
+
+- name: remove /usr/local/go if it is a dir 
+  file: path=/usr/local/go state=absent
+  when: dir.stat.exists and dir.stat.isdir
+
+- name: untar file
+  unarchive: src=/tmp/{{tarfile}} dest=/tmp copy=no
+  when: not go.stat.exists
+
+- name: set go version
+  command: chdir=/tmp mv go /usr/local/go{{version}}
+  when: not go.stat.exists
+
+- name: link go path
+  file: src=/usr/local/go{{version}} dest=/usr/local/go state=link
+
+- name: check bashrc exists
+  stat: path=/home/{{user}}/{{sh}}rc 
+  register: rc
+          
+- name: touch bashrc if does not exist
+  copy: content="" dest=/home/{{user}}/.{{sh}}rc force=no owner={{user}} group={{group}} mode=0644 
+  when: not rc.stat.exists and not user == ""
+
+- name: create project path
+  file: path={{gopath}} state=directory owner={{user}} group={{group}}
+  when: not user == ""
+
+- name: create gocode struct
+  file: path={{gopath}}/{{item}} state=directory owner={{user}} group={{group}}
+  when: not user == ""
+  with_items:
+          - src
+          - bin
+          - pkg
+  
+- name: Define GOPATH for user
+  lineinfile: dest=/home/{{user}}/.{{sh}}rc line="export GOPATH={{gopath}}" state=present 
+  when: not user == ""
+
+- name: Define GOPATH for user
+  lineinfile: dest=/home/{{user}}/.{{sh}}rc line="export PATH=/usr/local/go/bin:$PATH:$GOPATH/bin" state=present 
+  when: not user == ""

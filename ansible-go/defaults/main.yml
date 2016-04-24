@@ -1,0 +1,10 @@
+---
+# defaults file for ansible-go
+
+user: ""
+version: "1.6.1"
+tarfile: "go{{version}}.linux-amd64.tar.gz"
+gocode: "gocode"
+gopath: "/home/{{user}}/{{gocode}}"
+group: "admin"
+sh: "bash"
