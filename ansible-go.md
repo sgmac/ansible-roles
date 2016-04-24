@@ -14,7 +14,7 @@ Here is a list of all the default variables for this role.
 
 ```yaml
 user: ""
-version: "1.4.2"
+version: "1.6.1"
 tarfile: "go{{version}}.linux-amd64.tar.gz"
 gocode: "gocode"
 gopath: "/home/{{user}}/{{gocode}}"
