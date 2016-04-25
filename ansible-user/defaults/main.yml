@@ -1,0 +1,7 @@
+---
+user: "deploy"
+group: "admin"
+bash: "/bin/bash"
+hashed_password: ""
+pub_key: ""
+

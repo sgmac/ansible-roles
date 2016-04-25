@@ -1,0 +1,22 @@
+---
+- name: Create group
+  group: name={{ group }}  state=present
+
+- name: Create user
+  user: > 
+        name={{ user }}
+        comment="Manages deployments"
+        group={{ group }}
+        password="{{ hashed_password }}"
+        shell={{ bash }}
+
+- name: Add pub_key to authorized_keys 
+  authorized_key: user={{ user }} key="{{ lookup('file', pub_key)}}"  
+  when: pub_key != ''
+
+- name: Update sudo for user
+  lineinfile: > 
+         dest=/etc/sudoers
+         state=present regexp='^%ADMIN ALL\=' 
+         line='%ADMIN ALL=(ALL) NOPASSWD:ALL' 
+         validate='visudo -cf %s'
