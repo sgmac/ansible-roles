@@ -1,7 +1,5 @@
 Ansible SSH Role
 ===============
-[![Build Status](https://travis-ci.org/sgmac/ansible-ssh.svg?branch=master)](https://travis-ci.org/sgmac/ansible-ssh)
-
 The role installs and configures a OpenSSH server. 
 
 Variables
