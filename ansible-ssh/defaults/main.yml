@@ -1,0 +1,9 @@
+---
+allow_users: deploy
+deny_users: root
+port: 22
+permit_root_login: 'no'
+pub_key_authentication: 'yes'
+password_authentication: 'no'
+use_pam: 'yes'
+enable_ftp: 'yes'

@@ -19,3 +19,4 @@ host_key_checking=False
 Please, read the default variables and set according to your needs.
 
 - [ansible-go](ansible-go.md)
+- [ansible-ssh](ansible-ssh.md)
