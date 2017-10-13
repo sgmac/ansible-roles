@@ -2,4 +2,4 @@
 - hosts: localhost
   remote_user: root
   roles:
-          - {role: ansible-go, version: 1.5, sh: bash, user: travis, group: travis}
+          - {role: golang, version: 1.9.1, sh: bash, user: travis, group: travis}
