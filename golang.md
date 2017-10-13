@@ -34,14 +34,14 @@ You will find a new symlink ```/usr/local/go  -> /usr/local/go{{version}}```. Th
 ```yaml
     - hosts: servers
       roles:
-         - { role: ansible-go, version: "1.4.1"}
+         - { role: golang, version: "1.4.1"}
 ```
 2.) **Configure environment for an user**
 
 ```yaml
     - hosts: servers
       roles:
-         - { role: ansible-go, user: "deploy", version: "1.4.1"}
+         - { role: golang, user: "deploy", version: "1.4.1"}
 ```
 
 You may change the $GOPATH as well. Currently only supporting ```linux amd64```.
