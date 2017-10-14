@@ -1,0 +1,18 @@
+---
+galaxy_info:
+  author: "Sergio Galván"
+  company: 
+  license: MIT
+  min_ansible_version: 1.4
+  platforms:
+   - name: Ubuntu
+     versions:
+      - lucid
+      - raring
+   - name: Debian
+     versions:
+      - squeeze
+      - wheezy
+  categories:
+   - development
+dependencies: []

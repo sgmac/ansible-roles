@@ -21,5 +21,6 @@ host_key_checking=False
 Please, read the default variables and set according to your needs.
 
 - [golang](golang.md)
-- [ansible-ssh](ansible-ssh.md)
-- [ansible-user](ansible-user.md)
+- [ssh](ssh.md)
+- [users](users.md)
+- [rbenv](rbenv.md)

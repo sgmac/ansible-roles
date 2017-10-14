@@ -1,0 +1,6 @@
+---
+# Main vars
+
+
+rbenv_dir: "{{home}}/.rbenv"
+rbenv_plugins: "{{home}}/.rbenv/plugins"
