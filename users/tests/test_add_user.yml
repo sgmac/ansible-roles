@@ -2,4 +2,4 @@
 - hosts: localhost
   remote_user: root
   roles:
-    - {role: ansible-user, hashed_password: "$1$gfEzti/v$2XtwjlDGtJeopNm4pcavL0" }
+    - {role: users, hashed_password: "$1$gfEzti/v$2XtwjlDGtJeopNm4pcavL0" }
