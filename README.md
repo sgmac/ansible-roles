@@ -1,5 +1,7 @@
 # Ansible-roles
 
+[![Build Status](https://travis-ci.org/sgmac/ansible-roles.svg?branch=master)](https://travis-ci.org/sgmac/ansible-roles)
+
 This is just a repository holding all the ansible repositories I already have added to my github account. The idea is to clone this repository
 when using something like `cloud-init`.
 

@@ -1,8 +1,6 @@
 Ansible Go Role
 ===============
 
-[![Build Status](https://travis-ci.org/sgmac/ansible-roles/golang.svg?branch=master)](https://travis-ci.org/sgmac/ansible-roles/golang)
-
 The role installs Go pinned to a specific version, optionally setups the environment  for an user.
 
  * downloads a versioned tarball 
