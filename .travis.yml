@@ -9,14 +9,60 @@ install:
         - pip install ansible
         - printf "[defaults]\nroles_path = ../" > ansible.cfg
 
-
 script:
-        - "ansible-playbook -i tests/inventory tests/test.yml --syntax-check"
+        # golang testing
+        - "ansible-playbook -i golang/tests/inventory golang/tests/test_go_installation.yml --syntax-check"
 
-        - "ansible-playbook -i tests/inventory tests/test.yml --connection=local --sudo"
+        - "ansible-playbook -i golang/tests/inventory golang/tests/test_go_installation.yml --connection=local --sudo"
 
         - >
-           ansible-playbook -i tests/inventory tests/test.yml --connection=local --sudo
+           ansible-playbook -i golang/tests/inventory golang/tests/test_go_installation.yml --connection=local --sudo
            | grep -q 'changed=0.*failed=0'
            && (echo 'Idempotence test: pass' && exit 0)
            || (echo 'Idempotence test: fail' && exit 1)
+
+
+        - "ansible-playbook -i golang/tests/inventory golang/tests/test_go_version_user.yml --syntax-check"
+
+        - "ansible-playbook -i golang/tests/inventory golang/tests/test_go_version_user.yml --connection=local --sudo"
+
+        - >
+           ansible-playbook -i golang/tests/inventory golang/tests/test_go_version_user.yml --connection=local --sudo
+           | grep -q 'changed=0.*failed=0'
+           && (echo 'Idempotence test: pass' && exit 0)
+           || (echo 'Idempotence test: fail' && exit 1)
+
+           # ssh testing
+        - "ansible-playbook -i ssh/tests/inventory ssh/tests/test_ssh_installation.yml --syntax-check"
+
+        - "ansible-playbook -i ssh/tests/inventory ssh/tests/test_ssh_installation.yml --connection=local --sudo"
+
+        - >
+           ansible-playbook -i ssh/tests/inventory ssh/tests/test_ssh_installation.yml --connection=local --sudo
+           | grep -q 'changed=0.*failed=0'
+           && (echo 'Idempotence test: pass' && exit 0)
+           || (echo 'Idempotence test: fail' && exit 1)
+
+           # users testing
+        - "ansible-playbook -i users/tests/inventory users/tests/test_add_user.yml --syntax-check"
+
+        - "ansible-playbook -i users/tests/inventory users/tests/test_add_user.yml --connection=local --sudo"
+
+        - >
+           ansible-playbook -i users/tests/inventory users/tests/test_add_user.yml --connection=local --sudo
+           | grep -q 'changed=0.*failed=0'
+           && (echo 'Idempotence test: pass' && exit 0)
+           || (echo 'Idempotence test: fail' && exit 1)
+
+           # rbenv 
+          
+        - "ansible-playbook -i rbenv/tests/inventory rbenv/tests/test.yml --syntax-check"
+
+        - "ansible-playbook -i rbenv/tests/inventory rbenv/tests/test.yml --connection=local --sudo"
+
+        - >
+           ansible-playbook -i rbenv/tests/inventory rbenv/tests/test.yml --connection=local --sudo
+           | grep -q 'changed=0.*failed=0'
+           && (echo 'Idempotence test: pass' && exit 0)
+           || (echo 'Idempotence test: fail' && exit 1)
+ 
