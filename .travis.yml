@@ -11,7 +11,7 @@ install:
 
 script:
         # golang testing
-        - "ansible-playbook -i golang/tests/inventory tests/test_go_installation.yml --syntax-check"
+        - "ansible-playbook -i golang/tests/inventory golang/tests/test_go_installation.yml --syntax-check"
 
         - "ansible-playbook -i golang/tests/inventory golang/tests/test_go_installation.yml --connection=local --sudo"
 
