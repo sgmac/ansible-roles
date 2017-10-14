@@ -32,13 +32,26 @@ script:
            && (echo 'Idempotence test: pass' && exit 0)
            || (echo 'Idempotence test: fail' && exit 1)
 
-           # users testing
-        - "ansible-playbook -i users/tests/inventory users/tests/test_ssh_installation.yml --syntax-check"
+           # ssh testing
+        - "ansible-playbook -i ssh/tests/inventory ssh/tests/test_ssh_installation.yml --syntax-check"
 
-        - "ansible-playbook -i users/tests/inventory users/tests/test_ssh_installation.yml --connection=local --sudo"
+        - "ansible-playbook -i ssh/tests/inventory ssh/tests/test_ssh_installation.yml --connection=local --sudo"
 
         - >
-           ansible-playbook -i users/tests/inventory users/tests/test_ssh_installation.yml --connection=local --sudo
+           ansible-playbook -i ssh/tests/inventory ssh/tests/test_ssh_installation.yml --connection=local --sudo
            | grep -q 'changed=0.*failed=0'
            && (echo 'Idempotence test: pass' && exit 0)
            || (echo 'Idempotence test: fail' && exit 1)
+
+           # users testing
+        - "ansible-playbook -i users/tests/inventory users/tests/test_add_user.yml --syntax-check"
+
+        - "ansible-playbook -i users/tests/inventory users/tests/test_add_user.yml --connection=local --sudo"
+
+        - >
+           ansible-playbook -i users/tests/inventory users/tests/test_add_user.yml --connection=local --sudo
+           | grep -q 'changed=0.*failed=0'
+           && (echo 'Idempotence test: pass' && exit 0)
+           || (echo 'Idempotence test: fail' && exit 1)
+
+

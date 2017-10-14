@@ -30,14 +30,14 @@ As you may already seen,  __password_authentication__ is disabled by default. If
 ```yaml
     - hosts: servers
       roles:
-         - ansible-ssh
+         - ssh
 ```
 2.) **Allow users**
 
 ```yaml
     - hosts: servers
       roles:
-         - { role: ansible-ssh, allow_users: deploy git}
+         - { role: ssh, allow_users: deploy git}
 ```
 
 2.) **Deny users**
@@ -45,6 +45,6 @@ As you may already seen,  __password_authentication__ is disabled by default. If
 ```yaml
     - hosts: servers
       roles:
-         - { role: ansible-ssh, deny_users: root, enable_ftp: 'yes'}
+         - { role: ssh, deny_users: root, enable_ftp: 'yes'}
 ```
 
