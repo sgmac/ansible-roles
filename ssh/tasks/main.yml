@@ -1,9 +1,6 @@
 ---
-- name: Update cache
-  apt: update_cache=yes
-
 - name: Install openssh
-  apt: pkg=openssh-server state=present
+  apt: pkg=openssh-server update_cache=yes state=present
 
 - name: Configuration file
   template: src=sshd_config.j2 dest=/etc/ssh/sshd_config owner=root group=root
