@@ -1,0 +1,133 @@
+---
+- hosts: raspitron
+  remote_user: root
+  tasks:
+      - name: Apt update cache 
+        apt: update_cache=yes
+
+      - name: Uninstall Xorg enviroment
+        apt: pkg={{ item }} state=absent force=yes
+        with_items: 
+                - wolfram-engine               
+                - wpagui                       
+                - x11-common                   
+                - x11-utils                    
+                - x11-xkb-utils                
+                - x11-xserver-utils            
+                - x2x                          
+                - xarchiver                    
+                - xauth                        
+                - xdg-utils                    
+                - xfonts-encodings             
+                - xfonts-utils                 
+                - xinit                        
+                - xpdf                         
+                - xserver-common               
+                - xserver-xorg                 
+                - xserver-xorg-core            
+                - xserver-xorg-input-all       
+                - xserver-xorg-input-evdev     
+                - xserver-xorg-input-synaptics 
+                - xserver-xorg-video-fbdev     
+                - xserver-xorg-video-fbturbo   
+                - xz-utils                     
+                - zenity                       
+                - zenity-common                
+
+      - name: Uninstall X11 libs
+        apt: pkg={{ item }} state=absent force=yes
+        with_items: 
+                 -  bus-x11                        
+                 -  gsfonts-x11                    
+                 -  gstreamer1.0-x
+                 -  libfontenc1
+                 -  libice6
+                 -  libsm6
+                 -  libx11-6
+                 -  libx11-data                    
+                 -  libxau6
+                 -  libxaw7
+                 -  libxcomposite1
+                 -  libxdamage1
+                 -  libxdmcp6
+                 -  libxext6
+                 -  libxfixes3
+                 -  libxfont1                      
+                 -  libxi6
+                 -  libxinerama1
+                 -  libxkbfile1
+                 -  libxmu6
+                 -  libxmuu1
+                 -  libxpm4
+                 -  libxrandr2
+                 -  libxres1
+                 -  libxss1
+                 -  libxt6
+                 -  libxtst6
+                 -  libxv1
+                 -  libxxf86dga1
+                 -  libxxf86vm1
+                 -  tk8.4                          
+                 -  tk8.5                          
+                 -  x11-utils
+
+      - name: Uninstall X11 applications
+        apt: pkg={{ item }} state=absent
+        with_items: 
+              -  alsa-base                         
+              -  alsa-utils                        
+              -  cups-bsd                          
+              -  cups-client                       
+              -  cups-common                       
+              -  dbus-x11                          
+              -  desktop-base                      
+              -  desktop-file-utils                
+              -  epiphany-browser                  
+              -  epiphany-browser-data             
+              -  esound-common                     
+              -  fontconfig                        
+              -  fontconfig-config                 
+              -  fonts-droid                       
+              -  fonts-freefont-ttf                
+              -  fonts-roboto                      
+              -  freepats                          
+              -  galculator                        
+              -  gconf-service                     
+              -  gconf2                            
+              -  gconf2-common                     
+              -  ghostscript                       
+              -  gksu                              
+              -  gnome-desktop3-data               
+              -  gnome-icon-theme                  
+              -  gnome-icon-theme-symbolic         
+              -  gnome-themes-standard
+              -  gnome-themes-standard-data        
+              -  gpicview                          
+              -  gsettings-desktop-schemas         
+              -  gsfonts                           
+              -  gsfonts-x11                       
+              -  gstreamer1.0-alsa
+              -  gstreamer1.0-libav
+              -  gstreamer1.0-omx                  
+              -  gstreamer1.0-plugins-bad
+              -  gstreamer1.0-plugins-base
+              -  gstreamer1.0-plugins-good
+              -  gstreamer1.0-x
+              -  gtk2-engines
+              -  hicolor-icon-theme                
+              - libgtk-3-common
+              - libgtk2.0-common
+              - libcups2 
+                
+      - name: Uninstall rest of software
+        apt: pkg={{item}} state=absent force=yes
+        with_items:
+             - java-common
+             - libjpeg8
+             - lxde-icon-theme
+             - krb5-locales
+             - penguinspuzzle
+
+      - name:  APT autoremove
+        command: /usr/bin/apt-get autoremove -y
+
