@@ -18,5 +18,5 @@
   lineinfile: > 
          dest=/etc/sudoers
          state=present regexp='^%ADMIN ALL\=' 
-         line='%ADMIN ALL=(ALL) NOPASSWD:ALL' 
+         line='%admin ALL=(ALL) NOPASSWD:ALL' 
          validate='visudo -cf %s'
