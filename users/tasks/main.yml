@@ -17,6 +17,6 @@
 - name: Update sudo for user
   lineinfile: > 
          dest=/etc/sudoers
-         state=present regexp='^%ADMIN ALL\=' 
+         state=present regexp='^%admin ALL\=' 
          line='%admin ALL=(ALL) NOPASSWD:ALL' 
          validate='visudo -cf %s'
