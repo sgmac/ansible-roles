@@ -1,0 +1,25 @@
+---
+- name: Uninstall docker from repository
+  apt: pkg="{{ item }}" state=absent
+  with_items:
+          - docker
+          - docker-engine
+          - docker.io
+
+- name: Install requirements to add new repository 
+  apt: pkg="{{ item }}" state=present
+  with_items:
+          - apt-transport-https
+          - ca-certificates
+          - curl
+          - software-properties-common
+          - gnupg2
+
+- name: Docker's official GPG
+  shell: curl -fsSL https://download.docker.com/linux/$(. /etc/os-release; echo $ID)/gpg | sudo apt-key add -
+
+- name: Add Docker's new repository
+  shell: sudo add-apt-repository  "deb [arch=amd64] https://download.docker.com/linux/{{ distro }} {{ release }} stable"
+
+- name: Install docker
+  apt: update_cache=yes pkg=docker-ce state=present
