@@ -1,0 +1,4 @@
+- name: Install Go dependencies
+  yum: name={{item}} state=present
+  with_items:
+            - "{{ go_packages }}"

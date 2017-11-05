@@ -1,0 +1,8 @@
+---
+
+__go_packages:
+            - mercurial
+            - gcc
+            - libc6-dev
+            - git-core
+

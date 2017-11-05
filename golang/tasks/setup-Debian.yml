@@ -1,0 +1,4 @@
+- name: Install Go dependencies
+  apt: update_cache=yes name={{item}} state=present
+  with_items:
+            - "{{ go_packages }}"
