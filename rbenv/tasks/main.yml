@@ -1,7 +1,7 @@
 ---
 - name: Install git and ruby dependencies
   apt: update_cache=yes pkg={{ item }} state=present
-  sudo: yes
+  become: yes
   with_items:
           - git-core
           - build-essential
@@ -9,27 +9,27 @@
           - libreadline-dev
           - libssl-dev
           - libcurl4-openssl-dev
-          - ruby-mysql
+          - ruby-mysql2
           - libmysqlclient-dev
   when: ansible_os_family == 'Debian'
 
 
 - name: Install rbenv  locally
-  sudo_user: "{{ user }}"
-  sudo: yes
+  become_user: "{{ user }}"
+  become: yes
   git: repo=git://github.com/sstephenson/rbenv.git  dest="{{ rbenv_dir }}" accept_hostkey=True
 
 - name:  Install ruby-build plugin
-  sudo_user: "{{ user }}"
-  sudo: yes
+  become_user: "{{ user }}"
+  become: yes
   git: repo=git://github.com/sstephenson/ruby-build.git  dest="{{ rbenv_plugins }}/ruby-build" accept_hostkey=True
 
 - name: Touch your shell configuration file in case does not exist
   command: "/usr/bin/touch  creates={{home}}/.{{ sh }}rc"
 
 - name: Add rbenv to path in your shell configuration file
-  sudo_user: "{{ user }}"
-  sudo: yes
+  become_user: "{{ user }}"
+  become: yes
   lineinfile: dest="{{ home }}/.{{ sh }}rc" line="export PATH=$HOME/.rbenv/bin:$PATH" state=present
 
 - name: Custom .gemrc 
@@ -39,18 +39,18 @@
   copy: src=irbrc dest="{{ home }}/.irbrc" owner="{{ user }}" group="{{ user }}" mode=0644
 
 - name: Eval rbenv init
-  sudo_user: "{{ user }}"
-  sudo: yes
+  become_user: "{{ user }}"
+  become: yes
   lineinfile: dest="{{ home }}/.{{ sh }}rc" line="eval \"$(rbenv init -)\" " state=present
 
 - name: Install ruby version
-  sudo_user: "{{ user }}"
-  sudo: yes
+  become_user: "{{ user }}"
+  become: yes
   command: "{{rbenv_dir}}/bin/rbenv install {{ ruby_version }}  creates={{ home }}/.rbenv/versions/{{ ruby_version }}"
 
 - name: Enable ruby global version
-  sudo_user: "{{ user }}"
-  sudo: yes
+  become_user: "{{ user }}"
+  become: yes
   lineinfile: "dest={{ home }}/.rbenv/version line={{ ruby_version }} state=present create=yes" 
 
 
