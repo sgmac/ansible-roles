@@ -1,0 +1,10 @@
+---
+- hosts: all
+  become: 'yes'
+  roles:
+         # - {role: users, user: sgm, group: admin,  hashed_password: <HASHED_PASSWORD_HERE>, pub_key: keys/id_rsa.pub }
+         # - {role: golang, version: 1.9.2, user: ubuntu, group: ubuntu, sh: bash}
+         # - {role: ssh}
+         # - docker
+         # - {role: rbenv, user: ubuntu, home: /home/ubuntu, sh: bash, ruby_version: 2.4.2}
+         # - nginx
