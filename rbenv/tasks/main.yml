@@ -9,7 +9,7 @@
           - libreadline-dev
           - libssl-dev
           - libcurl4-openssl-dev
-          - ruby-mysql2
+          - ruby-mysql
           - libmysqlclient-dev
   when: ansible_os_family == 'Debian'
 
