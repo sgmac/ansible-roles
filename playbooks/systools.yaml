@@ -1,0 +1,10 @@
+---
+- hosts: lab
+  become: yes
+  tasks:
+          - name: Install 
+            apt: pkg={{ item }} state=present 
+            with_items:
+                    - sysstat
+                    - vim
+                    - linux-tools-common # Installs per
