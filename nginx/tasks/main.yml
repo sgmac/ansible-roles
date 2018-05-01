@@ -1,0 +1,16 @@
+---
+- name: Install nginx
+  apt: pkg="{{ item }}" state=present
+  with_items:
+          - nginx
+
+- name: Disable default hosts
+  file: path=/etc/nginx/sites-enabled/default state=absent
+
+- name: Add virtual host
+  template: src=vhost.j2 dest="/etc/nginx/sites-available/{{ vhost_name }}" owner=root group=root
+
+- name: Enable vhost
+  file: src="/etc/nginx/sites-available/{{ vhost_name }}" dest="/etc/nginx/sites-enabled/{{ vhost_name }}" state=link
+  notify:
+          - restart nginx

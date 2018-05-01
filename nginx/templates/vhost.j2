@@ -1,0 +1,30 @@
+server {
+    listen 80;
+    server_name wipefs.com;
+
+    {% if ssl_enabled %}
+    rewrite ^/(.*) https://wipefs.com/$1 permanent;
+    {% endif %}
+}
+
+
+server {
+
+	{% if ssl_enabled %}
+       listen 443 ssl;
+       listen [::]:443;
+       ssl_certificate /etc/letsencrypt/live/wipefs.com/fullchain.pem;
+       ssl_certificate_key /etc/letsencrypt/live/wipefs.com/privkey.pem;
+ 	{% endif %}
+
+       server_name {{ vhost_name }}
+
+
+       root /var/www/{{ vhost_name }};
+       index index.html;
+
+       location / {
+               try_files $uri $uri/ =404;
+       }
+}
+
